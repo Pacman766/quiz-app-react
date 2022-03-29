@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 * {
-  font-family: "Verdana", cursive, sans-serif;
+  font-family: 'Verdana', cursive, sans-serif;
   color: #ffffff;
 }
 
@@ -33,14 +33,20 @@ body {
 
 .score-section {
   display: flex;
+  flex-direction: column;
   font-size: 24px;
   align-items: center;
+  justify-content: center;
+  gap: 40px;
 }
 
 /* QUESTION/TIMER/LEFT SECTION */
 .question-section {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   position: relative;
+  gap: 20px;
 }
 
 .question-count {
@@ -52,7 +58,6 @@ body {
 }
 
 .question-text {
-  margin-bottom: 12px;
 }
 
 .timer-text {
@@ -105,4 +110,8 @@ button:focus {
 
 button svg {
   margin-right: 5px;
+}
+
+.reset-btn {
+  width: 190px;
 }

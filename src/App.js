@@ -42,8 +42,13 @@ export default function App() {
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
+  const [score, setScore] = useState(0);
 
-  const handleCurrentQuestions = () => {
+  const handleCurrentQuestions = (isCorrect) => {
+    if (isCorrect) {
+      setScore(score + 1);
+    }
+
     const count = currentQuestion + 1;
     if (count < questions.length) {
       setCurrentQuestion(count);
@@ -52,27 +57,42 @@ export default function App() {
     }
   };
 
+  const handleResetBtn = () => {
+    setCurrentQuestion(0);
+    setShowScore(false);
+    setScore(0);
+  };
+
   return (
     <div className="app">
       {/* HINT: replace "false" with logic to display the 
       score when the user has answered all the questions */}
       {showScore ? (
         <div className="score-section">
-          You scored 1 out of {questions.length}
+          You scored {score} out of {questions.length}
+          <button className="reset-btn" onClick={handleResetBtn}>
+            Reset
+          </button>
         </div>
       ) : (
         <>
           <div className="question-section">
             <div className="question-count">
-              <span>Question 1</span>/{questions.length}
+              <span>Question {currentQuestion + 1}</span>/{questions.length}
             </div>
             <div className="question-text">
               {questions[currentQuestion].questionText}
             </div>
+            <button className="reset-btn" onClick={handleResetBtn}>
+              Reset
+            </button>
           </div>
+
           <div className="answer-section">
             {questions[currentQuestion].answerOptions.map((answerOption) => (
-              <button onClick={handleCurrentQuestions}>
+              <button
+                onClick={() => handleCurrentQuestions(answerOption.isCorrect)}
+              >
                 {answerOption.answerText}
               </button>
             ))}
